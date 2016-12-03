@@ -1,4 +1,4 @@
-// import types from 'constants/ActionTypes';
+import types from 'constants/ActionTypes';
 
 export default function promiseMiddleware() {
   return next => (action) => {
@@ -21,14 +21,14 @@ export default function promiseMiddleware() {
             next({
               message: 'Oops! There is a problem with your network.'
               + ' Some features might not work.',
-              // type: types.SHOW_TOAST
+              type: types.SHOW_TOAST,
             });
           }
           if (error.status === 500) {
             next({
               message: 'Oops! Our server is experiencing trouble.'
               + ' Please retry after some time.',
-              // type: types.SHOW_TOAST
+              type: types.SHOW_TOAST,
             });
           }
           next({ ...rest, error, type: FAILURE });

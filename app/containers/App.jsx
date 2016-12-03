@@ -1,14 +1,22 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
+// import DevTools from './DevTools';
 
 class App extends React.Component {
   render() {
-    const nodes = (<div>Hello!!</div>);
+    const { children } = this.props;
+    const nodes = (
+      <section id="main-container" className="main-container">
+        {children}
+        {/* <DevTools /> */}
+      </section>
+    );
     return nodes;
   }
 }
 
-App.propTypes = {};
+App.propTypes = {
+  children: React.PropTypes,
+};
 
 export default connect()(App);

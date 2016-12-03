@@ -15,8 +15,5 @@ export function fetchNeeds(needs, props) {
   const { params, dispatch } = props;
   const promises = needs.map(need => dispatch(need(params)));
   return Promise.all(promises)
-    .then(
-      () => dispatch(MiscActions.endLoading()),
-      () => dispatch(MiscActions.endLoading('error'))
-    );
+    .finally(() => dispatch(MiscActions.endLoading()));
 }
