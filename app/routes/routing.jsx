@@ -7,13 +7,15 @@ import App from 'containers/App';
 import Home from 'containers/Home';
 
 import Login from 'containers/accounts/Login';
+import Register from 'containers/accounts/Register';
 import ForgotPassword from 'containers/accounts/ForgotPassword';
+
 import Dashboard from 'containers/dashboard/Dashboard';
 
 import NotFound from 'containers/NotFound';
 
 export default (store) => {
-  const isAuthenticated = (nextState, replace, cb) => {
+  const requireAuth = (nextState, replace, cb) => {
     const { accounts: { auth: { profile } } } = store.getState();
     if (!profile) {
       store.dispatch(AuthActions.getUserProfile())
@@ -41,18 +43,23 @@ export default (store) => {
       />
       <Route
         name="login"
-        path="/login"
+        path="login"
         component={Login}
       />
       <Route
+        name="register"
+        path="register"
+        component={Register}
+      />
+      <Route
         name="forgot-password"
-        path="/forgot-password"
+        path="forgot-password"
         component={ForgotPassword}
       />
-      <Route onEnter={isAuthenticated}>
+      <Route onEnter={requireAuth}>
         <Route
           name="dashboard"
-          path="/dashboard"
+          path="dashboard"
           component={Dashboard}
         />
       </Route>

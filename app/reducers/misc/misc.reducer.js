@@ -6,15 +6,11 @@ const defaultState = {
 };
 
 function START_LOADING(state) {
-  return Object.assign({}, state, {
-    isLoading: true
-  });
+  return Object.assign({}, state, { isLoading: true });
 }
 
-function END_LOADING(state, action) {
-  return Object.assign({}, state, {
-    isLoading: false
-  });
+function END_LOADING(state) {
+  return Object.assign({}, state, { isLoading: false });
 }
 
 const handlers = {

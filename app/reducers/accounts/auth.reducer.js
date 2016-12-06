@@ -8,15 +8,10 @@ const defaultState = {
   profile: null,
 };
 
-// This is more elegant way to write reducers as compared to switch case
 function LOGIN_SUCCESS(state, action) {
-  let data = action.data;
-  if (action.result) {
-    data = action.result;
-  }
-  cookie.save('authToken', data.data.auth_token, { path: '/' });
+  cookie.save('authToken', action.result.auth_token, { path: '/' });
   return Object.assign({}, state, {
-    authorization: data.data.auth_token,
+    authorization: action.result.auth_token,
   });
 }
 
@@ -24,9 +19,20 @@ function LOGIN_FAILURE(state) {
   return state;
 }
 
+function REGISTER_SUCCESS(state, action) {
+  cookie.save('authToken', action.result.auth_token, { path: '/' });
+  return Object.assign({}, state, {
+    authorization: action.result.auth_token,
+  });
+}
+
+function REGISTER_FAILURE(state) {
+  return state;
+}
+
 function GET_USER_PROFILE_SUCCESS(state, action) {
   return Object.assign({}, state, {
-    profile: action.result.data,
+    profile: action.result,
   });
 }
 
@@ -45,6 +51,8 @@ function FORGOT_PASSWORD_FAILURE(state) {
 const handlers = {
   [types.LOGIN_SUCCESS]: LOGIN_SUCCESS,
   [types.LOGIN_FAILURE]: LOGIN_FAILURE,
+  [types.REGISTER_SUCCESS]: REGISTER_SUCCESS,
+  [types.REGISTER_FAILURE]: REGISTER_FAILURE,
   [types.GET_USER_PROFILE_SUCCESS]: GET_USER_PROFILE_SUCCESS,
   [types.GET_USER_PROFILE_FAILURE]: GET_USER_PROFILE_FAILURE,
   [types.FORGOT_PASSWORD_SUCCESS]: FORGOT_PASSWORD_SUCCESS,

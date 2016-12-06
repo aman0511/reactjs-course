@@ -4,10 +4,13 @@ import constants from 'flux-constants';
 // so I don't have to type out duped strings
 export default constants([
 
-  // accounts
+  // Accounts
   'LOGIN',
   'LOGIN_SUCCESS',
   'LOGIN_FAILURE',
+  'REGISTER',
+  'REGISTER_SUCCESS',
+  'REGISTER_FAILURE',
   'GET_USER_PROFILE',
   'GET_USER_PROFILE_SUCCESS',
   'GET_USER_PROFILE_FAILURE',
@@ -15,7 +18,7 @@ export default constants([
   'FORGOT_PASSWORD_SUCCESS',
   'FORGOT_PASSWORD_FAILURE',
 
-  // misc
+  // Misc
   'SHOW_TOAST',
   'START_LOADING',
   'END_LOADING',

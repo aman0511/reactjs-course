@@ -13,4 +13,10 @@ export function startLoading() {
   };
 }
 
-export default { showToast, startLoading };
+export function endLoading() {
+  return {
+    type: types.END_LOADING,
+  };
+}
+
+export default { showToast, startLoading, endLoading };

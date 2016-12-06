@@ -1,21 +1,21 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { browserHistory, Link } from 'react-router';
+import { browserHistory } from 'react-router';
 
 import * as AuthActions from 'actions/accounts/auth.actions';
-import LoginForm from 'components/accounts/LoginForm';
+import RegisterForm from 'components/accounts/RegisterForm';
 
-class Login extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
-    this.login = this.login.bind(this);
+    this.register = this.register.bind(this);
   }
 
-  login(data) {
-    return this.props.AuthActions.login(data)
+  register(data) {
+    return this.props.AuthActions.register(data)
       .then(
-        () => browserHistory.push('/dashboard'),
+        () => browserHistory.push('/master-data/country/list'),
         error => console.log('error', error),
       );
   }
@@ -23,9 +23,8 @@ class Login extends React.Component {
   render() {
     return (
       <section>
-        <h2>Welcome to Login.</h2>
-        <LoginForm login={this.login} />
-        <Link to="/forgot-password">Forgot Password?</Link>
+        <h2>Welcome to Register.</h2>
+        <RegisterForm register={this.register} />
       </section>
     );
   }
@@ -39,11 +38,11 @@ const mapDispatchToProps = dispatch => ({
   AuthActions: bindActionCreators(AuthActions, dispatch),
 });
 
-Login.propTypes = {
+Register.propTypes = {
   AuthActions: React.PropTypes,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Login);
+)(Register);

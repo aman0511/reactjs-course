@@ -3,6 +3,9 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 
 const validate = (values) => {
   const errors = {};
+  if (!values.name) {
+    errors.name = 'Enter name';
+  }
   if (!values.email) {
     errors.email = 'Enter Email';
   } else if (values.email.length > 60) {
@@ -14,10 +17,10 @@ const validate = (values) => {
   return errors;
 };
 
-const LoginForm = (props) => {
-  const { handleSubmit, submitting, login, error } = props;
+const RegisterForm = (props) => {
+  const { handleSubmit, submitting, register, error } = props;
 
-  const submit = data => login(data)
+  const submit = data => register(data)
     .catch((err) => {
       const errobj = {
         _error: err.non_field_errors,
@@ -30,6 +33,10 @@ const LoginForm = (props) => {
     <section>
       <form onSubmit={handleSubmit(submit)}>
         {error && <strong>{error}</strong>}
+        <div>
+          <label htmlFor="name">Name</label>
+          <Field name="name" component="input" type="text" />
+        </div>
         <div>
           <label htmlFor="email">Email</label>
           <Field name="email" component="input" type="text" />
@@ -48,14 +55,14 @@ const LoginForm = (props) => {
   );
 };
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  login: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
   error: PropTypes,
 };
 
 export default reduxForm({
-  form: 'LoginForm',
+  form: 'RegisterForm',
   validate,
-})(LoginForm);
+})(RegisterForm);

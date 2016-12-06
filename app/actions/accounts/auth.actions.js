@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'utils/Interceptor';
 import types from 'constants/ActionTypes';
 import URLS from 'constants/ActionUrls';
 
@@ -6,6 +6,13 @@ export function login(data) {
   return {
     type: types.LOGIN,
     promise: axios.post(URLS.LOGIN, data),
+  };
+}
+
+export function register(data) {
+  return {
+    type: types.REGISTER,
+    promise: axios.post(URLS.REGISTER, data),
   };
 }
 
@@ -23,4 +30,4 @@ export function forgotPassword(data) {
   };
 }
 
-export default { login, getUserProfile, forgotPassword };
+export default { login, register, getUserProfile, forgotPassword };

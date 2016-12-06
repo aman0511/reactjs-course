@@ -4,7 +4,7 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 const validate = (values) => {
   const errors = {};
   if (!values.email) {
-    errors.email = 'Email Id is required';
+    errors.email = 'Enter Email';
   }
   return errors;
 };
@@ -24,7 +24,7 @@ const ForgotPasswordForm = (props) => {
   return (
     <section>
       <form onSubmit={handleSubmit(submit)}>
-        {error && <strong className="text-danger">{error}</strong>}
+        {error && <strong>{error}</strong>}
         <div>
           <label htmlFor="email">Email</label>
           <Field name="email" component="input" type="text" />

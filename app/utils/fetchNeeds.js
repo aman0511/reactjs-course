@@ -3,7 +3,7 @@ import * as MiscActions from 'actions/misc/misc.actions';
 export default function fetchComponentData(dispatch, components, params) {
   const needs = components.reduce((prev, current) =>
     Object.keys(current).reduce((acc, key) =>
-      (current[key].hasOwnProperty('needs') ? current[key].needs.concat(acc) : acc),
+      ({}.hasOwnProperty.call(current[key], 'needs') ? current[key].needs.concat(acc) : acc),
       prev), []);
   const promises = needs.map(need => dispatch(need(params)));
   return Promise.all(promises);
@@ -15,5 +15,8 @@ export function fetchNeeds(needs, props) {
   const { params, dispatch } = props;
   const promises = needs.map(need => dispatch(need(params)));
   return Promise.all(promises)
-    .finally(() => dispatch(MiscActions.endLoading()));
+    .then(
+      () => dispatch(MiscActions.endLoading()),
+      () => dispatch(MiscActions.endLoading()),
+    );
 }
