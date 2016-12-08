@@ -7,6 +7,7 @@ import * as AuthActions from 'actions/accounts/auth.actions';
 import LoginForm from 'components/accounts/LoginForm';
 
 class Login extends React.Component {
+
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
@@ -29,6 +30,7 @@ class Login extends React.Component {
       </section>
     );
   }
+
 }
 
 const mapStateToProps = state => ({
