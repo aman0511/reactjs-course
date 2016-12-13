@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import * as AuthActions from 'actions/accounts/auth.actions';
-import ForgotPasswordForm from 'components/accounts/ForgotPasswordForm';
+import * as UserActions from 'actions/accounts/user.actions';
+import ForgotPasswordForm from 'components/accounts/forgotPassword/ForgotPasswordForm';
 
 class ForgotPassword extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class ForgotPassword extends React.Component {
   }
 
   forgotPassword(data) {
-    return this.props.AuthActions.forgotPassword(data);
+    return this.props.UserActions.forgotPassword(data);
   }
 
   render() {
@@ -30,15 +30,15 @@ class ForgotPassword extends React.Component {
 }
 
 ForgotPassword.propTypes = {
-  AuthActions: React.PropTypes,
+  UserActions: React.PropTypes.instanceOf(Object),
 };
 
 const mapDispatchToProps = dispatch => ({
-  AuthActions: bindActionCreators(AuthActions, dispatch),
+  UserActions: bindActionCreators(UserActions, dispatch),
 });
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  user: state.user,
 });
 
 export default connect(

@@ -19,7 +19,7 @@ function Root(props) {
 }
 
 Root.propTypes = {
-  store: React.PropTypes,
+  store: React.PropTypes.instanceOf(Object),
 };
 
 export default Root;

@@ -49,10 +49,10 @@ const LoginForm = (props) => {
 };
 
 LoginForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  login: PropTypes.func.isRequired,
-  error: PropTypes,
+  handleSubmit: PropTypes.instanceOf(Function).isRequired,
+  submitting: PropTypes.bool.isRequired, // This is not working as instanceOf
+  login: PropTypes.instanceOf(Function).isRequired,
+  error: PropTypes.instanceOf(Object),
 };
 
 export default reduxForm({

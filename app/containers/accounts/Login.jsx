@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory, Link } from 'react-router';
 
-import * as AuthActions from 'actions/accounts/auth.actions';
-import LoginForm from 'components/accounts/LoginForm';
+import * as UserActions from 'actions/accounts/user.actions';
+import LoginForm from 'components/accounts/login/LoginForm';
 
 class Login extends React.Component {
 
@@ -14,7 +14,7 @@ class Login extends React.Component {
   }
 
   login(data) {
-    return this.props.AuthActions.login(data)
+    return this.props.UserActions.login(data)
       .then(
         () => browserHistory.push('/dashboard'),
         error => console.log('error', error),
@@ -38,11 +38,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  AuthActions: bindActionCreators(AuthActions, dispatch),
+  UserActions: bindActionCreators(UserActions, dispatch),
 });
 
 Login.propTypes = {
-  AuthActions: React.PropTypes,
+  UserActions: React.PropTypes.instanceOf(Object),
 };
 
 export default connect(

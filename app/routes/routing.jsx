@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import * as AuthActions from 'actions/accounts/auth.actions';
+import * as UserActions from 'actions/accounts/user.actions';
 
 import App from 'containers/App';
 import Home from 'containers/Home';
@@ -16,12 +16,12 @@ import NotFound from 'containers/NotFound';
 
 export default (store) => {
   const requireAuth = (nextState, replace, cb) => {
-    const { accounts: { auth: { profile } } } = store.getState();
+    const { accounts: { user: { profile } } } = store.getState();
     if (!profile) {
-      store.dispatch(AuthActions.getUserProfile())
+      store.dispatch(UserActions.getUserProfile())
         .then(
           () => {
-            const user = store.getState().accounts.auth.profile;
+            const user = store.getState().accounts.user.profile;
             if (!user) replace('/');
             cb();
           },

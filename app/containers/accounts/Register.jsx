@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
-import * as AuthActions from 'actions/accounts/auth.actions';
-import RegisterForm from 'components/accounts/RegisterForm';
+import * as UserActions from 'actions/accounts/user.actions';
+import RegisterForm from 'components/accounts/register/RegisterForm';
 
 class Register extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Register extends React.Component {
   }
 
   register(data) {
-    return this.props.AuthActions.register(data)
+    return this.props.UserActions.register(data)
       .then(
         () => browserHistory.push('/master-data/country/list'),
         error => console.log('error', error),
@@ -35,11 +35,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  AuthActions: bindActionCreators(AuthActions, dispatch),
+  UserActions: bindActionCreators(UserActions, dispatch),
 });
 
 Register.propTypes = {
-  AuthActions: React.PropTypes,
+  UserActions: React.PropTypes.instanceOf(Object),
 };
 
 export default connect(

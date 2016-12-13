@@ -12,6 +12,11 @@ To Run Project locally :-
 
 Conventions :-
 
+* General
+	- Always specify PropTypes on components as well as containers.
+	http://wecodetheweb.com/2015/06/02/why-react-proptypes-are-important/
+	- Do absolute imports only.
+
 * Modules 
 	- These are business functionality modules.
 	- Noun e.g. accounts, dashboard
@@ -26,7 +31,7 @@ Conventions :-
 * Components
 	- This has to be truely dumb component.
 	- Each component will have its CSS along with it.
-	- folder structure - <module>/<entity>/<containerName/List>/<componentName>
+	- folder structure - <module>/<entity>/<containerName/<componentName>
 	  e.g. masterData/country/List/componentName1.jsx
 	  masterData/country/List/style.jsx
 	- Follow state management from

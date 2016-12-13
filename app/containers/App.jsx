@@ -20,7 +20,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  children: React.PropTypes,
+  children: React.PropTypes.instanceOf(Object).isRequired,
 };
 
 export default connect()(App);
