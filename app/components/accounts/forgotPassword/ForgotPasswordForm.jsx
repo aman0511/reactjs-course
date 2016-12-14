@@ -40,10 +40,10 @@ const ForgotPasswordForm = (props) => {
 };
 
 ForgotPasswordForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.instanceOf(Function).isRequired,
   submitting: PropTypes.bool.isRequired,
-  forgotPassword: PropTypes.func.isRequired,
-  error: PropTypes,
+  forgotPassword: PropTypes.instanceOf(Function).isRequired,
+  error: PropTypes.instanceOf(Object),
 };
 
 export default reduxForm({

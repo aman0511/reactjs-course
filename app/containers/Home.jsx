@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 
-import { Row, Col } from 'antd';
+import Row from 'antd/lib/row';
+import Col from 'antd/lib/col';
 
 const Home = () => (
   <Row>

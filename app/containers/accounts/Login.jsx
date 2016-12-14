@@ -1,7 +1,8 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { browserHistory, Link } from 'react-router';
+import bindActionCreators from 'redux/lib/bindActionCreators';
+import connect from 'react-redux/lib/components/connect';
+import Link from 'react-router/lib/Link';
+import browserHistory from 'react-router/lib/browserHistory';
 
 import * as UserActions from 'actions/accounts/user.actions';
 import LoginForm from 'components/accounts/login/LoginForm';

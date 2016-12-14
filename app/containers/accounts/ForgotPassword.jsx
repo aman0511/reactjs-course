@@ -1,7 +1,7 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import bindActionCreators from 'redux/lib/bindActionCreators';
+import connect from 'react-redux/lib/components/connect';
+import Link from 'react-router/lib/Link';
 
 import * as UserActions from 'actions/accounts/user.actions';
 import ForgotPasswordForm from 'components/accounts/forgotPassword/ForgotPasswordForm';

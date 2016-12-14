@@ -1,5 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
+// import Field from 'redux-form/lib/Field';
+// import reduxForm from 'redux-form/lib/reduxForm';
+// import SubmissionError from 'redux-form/lib/SubmissionError';
 
 const validate = (values) => {
   const errors = {};
@@ -56,10 +59,10 @@ const RegisterForm = (props) => {
 };
 
 RegisterForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.instanceOf(Function).isRequired,
   submitting: PropTypes.bool.isRequired,
-  register: PropTypes.func.isRequired,
-  error: PropTypes,
+  register: PropTypes.instanceOf(Function).isRequired,
+  error: PropTypes.instanceOf(Object),
 };
 
 export default reduxForm({
