@@ -27,7 +27,7 @@ class Login extends React.Component {
       <section>
         <h2>Welcome to Login.</h2>
         <LoginForm login={this.login} />
-        <Link to="/forgot-password">Forgot Password?</Link>
+        <Link to="/accounts/forgot-password">Forgot Password?</Link>
       </section>
     );
   }

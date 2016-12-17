@@ -5,7 +5,7 @@ import Provider from 'react-redux/lib/components/Provider';
 // <Provider> magically make the store available to all container
 // components in the application without passing it explicitly
 import { syncHistoryWithStore } from 'react-router-redux';
-import routes from 'routes/routing';
+import routes from 'containers/routes';
 
 function Root(props) {
   const { store } = props;
