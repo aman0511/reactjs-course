@@ -14,10 +14,7 @@ class Register extends React.Component {
 
   register(data) {
     return this.props.UserActions.register(data)
-      .then(
-        () => browserHistory.push('/master-data/country/list'),
-        error => console.log('error', error),
-      );
+      .then(() => browserHistory.push('/master-data/country/list'));
   }
 
   render() {

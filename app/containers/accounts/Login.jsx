@@ -16,10 +16,7 @@ class Login extends React.Component {
 
   login(data) {
     return this.props.UserActions.login(data)
-      .then(
-        () => browserHistory.push('/dashboard'),
-        error => console.log('error', error),
-      );
+      .then(() => browserHistory.push('/dashboard'));
   }
 
   render() {
@@ -27,7 +24,7 @@ class Login extends React.Component {
       <section>
         <h2>Welcome to Login.</h2>
         <LoginForm login={this.login} />
-        <Link to="/accounts/forgot-password">Forgot Password?</Link>
+        <Link to="/forgot-password">Forgot Password?</Link>
       </section>
     );
   }

@@ -9,7 +9,7 @@ const Home = () => (
   <Row>
     <Col span={24}>
       <h2>Welcome to Home.</h2>
-      <Link to={'/accounts/login'}>Login</Link>
+      <Link to={'/login'}>Login</Link>
       <Button type="primary">Primary</Button>
     </Col>
   </Row>
