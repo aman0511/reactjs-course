@@ -12,7 +12,7 @@ module.exports = {
       'react-hot-loader/patch',
       './index.jsx'
     ],
-    vendor: ['react', 'redux', 'react-redux', 'react-router', 'react-router-redux']
+    vendor: ['react', 'react-dom', 'axios', 'redux', 'react-redux', 'react-router', 'react-router-redux']
   },
   output: {
     path: path.join(__dirname, '../build'),

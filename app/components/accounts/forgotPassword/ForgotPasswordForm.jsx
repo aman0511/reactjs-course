@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 
+import style from './style.css';
+
 const validate = (values) => {
   const errors = {};
   if (!values.email) {
@@ -22,7 +24,7 @@ const ForgotPasswordForm = (props) => {
     });
 
   return (
-    <section>
+    <section className={style.formContainer}>
       <form onSubmit={handleSubmit(submit)}>
         {error && <strong>{error}</strong>}
         <div>
