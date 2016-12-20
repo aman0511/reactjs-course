@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
 
 /* GET home page. */
 router.get('/whoami', (req, res) => {
@@ -7,12 +8,9 @@ router.get('/whoami', (req, res) => {
 });
 
 router.get('/*', function(req, res, next) {
+	console.log('hello world');
   var hostname = req.headers.host.split(":")[0];
-  if (hostname == 'localhost') {
-    res.render('index', { title: 'T2B', hostname: hostname });
-  } else if (hostname == 'employer.localhost'){
-    res.render('index', { title: 'w', hostname: hostname });
-  }
+  res.sendFile(path.join(__dirname, './../../build/index.html'));
 });
 
 module.exports = router;

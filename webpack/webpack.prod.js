@@ -10,11 +10,7 @@ var PRODUCTION = process.env.NODE_ENV === 'production';
 module.exports = {
   context: path.join(__dirname, '../app'),
   entry: {
-    app: [
-      'webpack-hot-middleware/client',
-      'react-hot-loader/patch',
-      './index.jsx'
-    ],
+    app: './index.jsx',
     vendor: ['react', 'react-dom', 'axios', 'redux', 'react-redux', 'react-router', 'react-router-redux']
   },
   output: {
@@ -23,7 +19,6 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       DEVELOPMENT: JSON.stringify(DEVELOPMENT),
       PRODUCTION: JSON.stringify(PRODUCTION)
@@ -31,6 +26,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './../server/views/index.jade'
     }),
+    new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.CommonsChunkPlugin(
       /* chunkName= */"vendor",
       /* filename= */"[hash].[name].js"
@@ -93,13 +89,8 @@ module.exports = {
     ],
     extensions: ['', '.js', '.jsx']
   },
-  node: {
-    fs: "empty"
-  },
-  devtool: 'source-map',
   devServer: {
     progress: true,
-    colors: true,
-    hot: true
+    colors: true
   }
 };

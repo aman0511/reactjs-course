@@ -12,7 +12,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(express.static(path.join(__dirname, '../build')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -24,15 +23,26 @@ app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
 
 // initialize webpack HMR
 var webpack = require('webpack')
-var webpackDevMiddleware = require('webpack-dev-middleware')
-var webpackHotMiddleware = require('webpack-hot-middleware')
-var config = require('../webpack/webpack.config')
+var config = require('../webpack/webpack.prod')
+if (process.env.NODE_ENV === 'development') {
+  var config = require('../webpack/webpack.config')
+  var webpackDevMiddleware = require('webpack-dev-middleware')
+  var webpackHotMiddleware = require('webpack-hot-middleware')
+}
+else {
+  app.use('/static', express.static(path.join(__dirname, '../build')));
+}
 var compiler = webpack(config)
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
-app.use(webpackHotMiddleware(compiler))
+
+console.log(config);
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
+  app.use(webpackHotMiddleware(compiler))
+}
 
 // Include server routes as a middleware
-if (app.get('env') === 'development') {
+if (process.env.NODE_ENV === 'development') {
   app.use('*', function (req, res, next) {
     var filename = path.join(compiler.outputPath,'index.html');
     compiler.outputFileSystem.readFile(filename, function(err, result){
@@ -45,6 +55,7 @@ if (app.get('env') === 'development') {
     });
   });
 }
+
 app.use(function(req, res, next) {
   require('./routes/index')(req, res, next);
 });
