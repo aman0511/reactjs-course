@@ -8,17 +8,16 @@ const Sidenav = (props) => {
   const { user: { profile: { states } } } = props;
   return (
     <section>
-      {states.map((item, index) => {
-        console.log(item);
-        return item.position === 'nav' && (
+      {states.map((item, index) => (
+        item.position === 'nav' && (
           <Row key={index}>
             <Col span={24}>
               <Link to={item.url}>{item.label}</Link>
               <br />
             </Col>
           </Row>
-        );
-      })}
+        )
+      ))}
     </section>
   );
 };

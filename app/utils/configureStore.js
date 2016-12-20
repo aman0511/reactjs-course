@@ -6,7 +6,7 @@ import { routerMiddleware } from 'react-router-redux';
 
 import combinedReducers from 'reducers';
 import DevTools from 'containers/DevTools';
-import promiseMiddleware from './PromiseMiddleware';
+import promiseMiddleware from './promiseMiddleware';
 
 const logger = createLogger({
   level: 'info',

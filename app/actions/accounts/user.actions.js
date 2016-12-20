@@ -1,4 +1,4 @@
-import axios from 'utils/Interceptor';
+import axios from 'utils/interceptor';
 import types from './actionTypes';
 import URLS from './urls';
 

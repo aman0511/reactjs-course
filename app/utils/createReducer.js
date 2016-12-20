@@ -1,4 +1,4 @@
-const createReducer = function (initialState, actionHandlers) {
+const createReducer = function createReducer(initialState, actionHandlers) {
   return (state = initialState, action) => {
     const reduceFn = actionHandlers[action.type];
     if (reduceFn) {
