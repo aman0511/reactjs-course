@@ -1,6 +1,6 @@
 import cookie from 'react-cookie';
 
-import types from 'constants/ActionTypes';
+import types from 'actions/accounts/actionTypes';
 import createReducer from 'utils/createReducer';
 
 const defaultState = {

@@ -1,0 +1,16 @@
+import userActions from 'flux-constants';
+
+export default userActions([
+  'LOGIN',
+  'LOGIN_SUCCESS',
+  'LOGIN_FAILURE',
+  'REGISTER',
+  'REGISTER_SUCCESS',
+  'REGISTER_FAILURE',
+  'GET_USER_PROFILE',
+  'GET_USER_PROFILE_SUCCESS',
+  'GET_USER_PROFILE_FAILURE',
+  'FORGOT_PASSWORD',
+  'FORGOT_PASSWORD_SUCCESS',
+  'FORGOT_PASSWORD_FAILURE',
+]);

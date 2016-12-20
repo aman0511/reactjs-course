@@ -1,6 +1,6 @@
 import axios from 'utils/Interceptor';
-import types from 'constants/ActionTypes';
-import URLS from 'constants/ActionUrls';
+import types from './actionTypes';
+import URLS from './urls';
 
 export function login(data) {
   return {
@@ -29,5 +29,3 @@ export function forgotPassword(data) {
     promise: axios.post(URLS.FORGOT_PASSWORD, data),
   };
 }
-
-export default { login, register, getUserProfile, forgotPassword };

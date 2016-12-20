@@ -1,4 +1,4 @@
-import types from 'constants/ActionTypes';
+import types from './actionTypes';
 
 export function showToast(message) {
   return {
@@ -18,5 +18,3 @@ export function endLoading() {
     type: types.END_LOADING,
   };
 }
-
-export default { showToast, startLoading, endLoading };
