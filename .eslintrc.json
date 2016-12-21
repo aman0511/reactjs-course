@@ -5,6 +5,7 @@
     "react"
   ],
   "settings": {
+    "import/parser": "babel-eslint",
     "import/resolver": {
       "webpack": {
         "config": "webpack/webpack.config.js"
