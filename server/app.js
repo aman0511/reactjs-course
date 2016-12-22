@@ -34,8 +34,6 @@ else {
 }
 var compiler = webpack(config)
 
-console.log(config);
-
 if (process.env.NODE_ENV === 'development') {
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
   app.use(webpackHotMiddleware(compiler))

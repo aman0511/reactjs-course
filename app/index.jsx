@@ -14,16 +14,22 @@ render(
   document.getElementById('container'),
 );
 
-if (module.hot) {
-  module.hot.accept('./Root', () => {
-    /*eslint-disable*/
-    const RootComponent = require('./Root.jsx').default;
-    /*eslint-enable*/
-    render(
-      <AppContainer>
-        <RootComponent store={store} />
-      </AppContainer>,
-      document.getElementById('container'),
-    );
-  });
+/* eslint-disable */
+if (!PRODUCTION) {
+  const { whyDidYouUpdate } = require('why-did-you-update');
+  whyDidYouUpdate(React);
+  if (module.hot) {
+    module.hot.accept('./Root', () => {
+      /*eslint-disable*/
+      const RootComponent = require('./Root.jsx').default;
+      /*eslint-enable*/
+      render(
+        <AppContainer>
+          <RootComponent store={store} />
+        </AppContainer>,
+        document.getElementById('container'),
+      );
+    });
+  }
 }
+/* eslint-enable */

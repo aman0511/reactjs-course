@@ -8,7 +8,6 @@ router.get('/whoami', (req, res) => {
 });
 
 router.get('/*', function(req, res, next) {
-	console.log('hello world');
   var hostname = req.headers.host.split(":")[0];
   res.sendFile(path.join(__dirname, './../../build/index.html'));
 });
