@@ -15,8 +15,7 @@ module.exports = {
       'react-hot-loader/patch',
       './index.jsx'
     ],
-    vendor1: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-redux', 'axios'],
-    vendor2: ['antd']
+    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-redux', 'axios'],
   },
   output: {
     path: path.join(__dirname, '../build'),
@@ -47,7 +46,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: "style-loader!css-loader?modules&importLoaders=1&localIdentName=[local]"
+      },
+      {
+        test: /\.scss$/,
+        loader: "style-loader!css-loader!sass-loader"
       },
       {
         test   : /\.woff/,
@@ -72,16 +75,13 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif)$/,
         loader: 'url-loader?limit=8192&name=images/[hash:12].[ext]'
-      },
-      {
-        test: /\.scss$/,
-        loader: "style-loader!css-loader!sass-loader"
       }
     ]
   },
   resolve: {
     root: [
       path.resolve(__dirname, '../app'),
+      path.resolve(__dirname, '../assets'),
       path.resolve(__dirname, '../client'),
       path.resolve(__dirname, '../node_modules')
     ],

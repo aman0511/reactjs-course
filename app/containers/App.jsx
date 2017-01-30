@@ -4,6 +4,12 @@ import connect from 'react-redux/lib/components/connect';
 // import DevTools from './DevTools';
 
 import { APP } from './seo';
+/* eslint-disable */
+if ( 'undefined' !== typeof window ) {
+  require( './../../assets/styles/foundation/styles.scss' );
+}
+/* eslint-enable */
+
 
 class App extends React.Component {
 

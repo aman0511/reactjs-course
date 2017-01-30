@@ -13,12 +13,11 @@ module.exports = {
   entry: {
     babel: ['babel-polyfill'],
     app: './index.jsx',
-    vendor1: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-redux', 'axios'],
-    vendor2: ['antd']
+    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-redux', 'axios']
   },
   output: {
     path: path.join(__dirname, '../build'),
-    filename: '[hash].[name].js',
+    filename: '[name].js',
     publicPath: '/static/'
   },
   plugins: [
@@ -28,7 +27,8 @@ module.exports = {
       SERVER_URL: JSON.stringify('http://api.thecargosite.com')
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor2', 'vendor1'],
+      // names: ['vendor2', 'vendor1'],
+      names: 'vendor',
       filename: '[name].js'
     }),
     new webpack.optimize.DedupePlugin(),
@@ -94,6 +94,7 @@ module.exports = {
   resolve: {
     root: [
       path.resolve(__dirname, '../app'),
+      path.resolve(__dirname, '../assets'),
       path.resolve(__dirname, '../client'),
       path.resolve(__dirname, '../node_modules')
     ],
