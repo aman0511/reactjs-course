@@ -1,4 +1,5 @@
 extends layout
 
 block content
-  div(id="container")
+  <div id="container">!{initView}</div>
+  <script>window.$REDUX_STATE = !{initialState}</script>

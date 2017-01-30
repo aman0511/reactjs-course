@@ -1,17 +1,20 @@
 'use strict';
 
+require('babel-polyfill');
 var path = require('path');
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CompressionPlugin = require('compression-webpack-plugin');
 
-var DEVELOPMENT = process.env.NODE_ENV === 'development';
 var PRODUCTION = process.env.NODE_ENV === 'production';
 
 module.exports = {
   context: path.join(__dirname, '../app'),
   entry: {
+    babel: ['babel-polyfill'],
     app: './index.jsx',
-    vendor: ['react', 'react-dom', 'axios', 'redux', 'react-redux', 'react-router', 'react-router-redux']
+    vendor1: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-redux', 'axios'],
+    vendor2: ['antd']
   },
   output: {
     path: path.join(__dirname, '../build'),
@@ -19,18 +22,25 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+    new ExtractTextPlugin('[name].css'),
     new webpack.DefinePlugin({
-      DEVELOPMENT: JSON.stringify(DEVELOPMENT),
-      PRODUCTION: JSON.stringify(PRODUCTION)
+      PRODUCTION: JSON.stringify(PRODUCTION),
+      SERVER_URL: JSON.stringify('http://api.thecargosite.com')
     }),
-    new HtmlWebpackPlugin({
-      template: './../server/views/index.jade'
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor2', 'vendor1'],
+      filename: '[name].js'
     }),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin(
-      /* chunkName= */"vendor",
-      /* filename= */"[hash].[name].js"
-    )
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    })
   ],
   module: {
     // webpack can only handle JavaScript natively, so we need the loader to process different types
@@ -49,7 +59,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader"
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
       },
       {
         test   : /\.woff/,
@@ -76,8 +86,8 @@ module.exports = {
         loader: 'url-loader?limit=8192&name=images/[hash:12].[ext]'
       },
       {
-        test: /\.jade$/,
-        loader: 'jade-loader'
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
       }
     ]
   },
@@ -87,7 +97,7 @@ module.exports = {
       path.resolve(__dirname, '../client'),
       path.resolve(__dirname, '../node_modules')
     ],
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.scss', '.css']
   },
   devServer: {
     progress: true,

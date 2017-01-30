@@ -25,14 +25,14 @@ const ForgotPasswordForm = (props) => {
 
   return (
     <section className={style.formContainer}>
-      <form onSubmit={handleSubmit(submit)}>
+      <form onSubmit={handleSubmit(submit)} className={style.formContainer2}>
         {error && <strong>{error}</strong>}
         <div>
           <label htmlFor="email">Email</label>
           <Field name="email" component="input" type="text" />
         </div>
         <div>
-          <button type="submit" disabled={submitting}>
+          <button type="submit" disabled={submitting} className={style.formContainer3}>
             {submitting ? 'Sending' : 'Send'}
           </button>
         </div>

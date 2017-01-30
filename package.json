@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "rm -rf ./build && NODE_ENV=development NODE_PATH=./app node ./bin/www",
-    "build": "rm -rf ./build && mkdir ./build && NODE_ENV=production && webpack --config webpack/webpack.prod.js --progress --colors",
-    "build-up": "npm run build &&  NODE_PATH=./app node ./bin/www"
+    "build": "rm -rf ./build && mkdir ./build && NODE_ENV=production && webpack --config webpack/webpack.prod.js -d --progress --colors",
+    "build-up": "NODE_ENV=production && NODE_PATH=./app node ./bin/www"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "babel-preset-es2015-loose": "^8.0.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
+    "babel-register": "^6.22.0",
     "css-loader": "^0.26.1",
     "eslint": "^3.11.1",
     "eslint-config-airbnb": "^13.0.0",
@@ -27,8 +28,8 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.7.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
-    "html-webpack-plugin": "^2.24.1",
     "jade-loader": "^0.8.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",

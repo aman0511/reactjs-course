@@ -1,4 +1,13 @@
+import React from 'react';
+import Route from 'react-router/lib/Route';
+import IndexRoute from 'react-router/lib/IndexRoute';
+
 import * as UserActions from 'actions/accounts/user.actions';
+
+if (typeof require.ensure !== 'function') require.ensure = function (d, c) { c(require); };
+
+/* eslint-disable */
+const accountsRoutes = require('./accounts/routes').default;
 
 export default (store) => {
   const requireAuth = (nextState, replace, cb) => {
@@ -23,34 +32,41 @@ export default (store) => {
     }
   };
 
-  return {
-    childRoutes: [
-      {
-        path: '/',
-        component: require('./App').default, // eslint-disable-line global-require
-        childRoutes: [
-          require('./accounts/routes').default, // eslint-disable-line global-require
-          {
-            path: '/dashboard',
-            onEnter: requireAuth,
-            childRoutes: [
-              {
-                path: '/dashboard/home',
-                getComponents: (location, cb) => require.ensure(
-                  [], () => cb(null, require('./dashboard/Dashboard').default), // eslint-disable-line global-require
-                ),
-              },
-            ],
-          },
-          {
-            path: '*',
-            component: require('./NotFound').default, // eslint-disable-line global-require
-          },
-        ],
-        indexRoute: {
-          component: require('./Home').default, // eslint-disable-line global-require
-        },
-      },
-    ],
-  };
+  return (
+    <Route
+      path="/"
+      getComponent={(nextState, cb) => require.ensure(
+        [], () => cb(null, require('./App').default),
+      )}
+    >
+      <IndexRoute
+        name="home"
+        getComponent={(nextState, cb) => require.ensure(
+          [], () => cb(null, require('./Home').default),
+        )}
+      />
+      <Route>
+        {accountsRoutes}
+      </Route>
+      <Route
+        name="dashboard"
+        onEnter={requireAuth}
+      >
+        <Route
+          path="dashboard/home"
+          name="Landing"
+          getComponent={(nextState, cb) => require.ensure(
+            [], () => cb(null, require('./dashboard/Dashboard').default),
+          )}
+        />
+      </Route>
+      <Route
+        path="*"
+        getComponent={(nextState, cb) => require.ensure(
+          [], () => cb(null, require('./NotFound').default),
+        )}
+      />
+    </Route>
+  );
 };
+/* eslint-enable */

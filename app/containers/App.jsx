@@ -1,5 +1,3 @@
-import 'antd/dist/antd.min.css';
-
 import React from 'react';
 import Helmet from 'react-helmet';
 import connect from 'react-redux/lib/components/connect';

@@ -1,3 +1,7 @@
+'use strict';
+
+require('babel-register')
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -5,7 +9,25 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
+// var routes = require('./routes/index');
+
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import ReactCookie from 'react-cookie';
+
+import { Router, match } from 'react-router';
+import routes from '../app/containers/routes';
+
+import { applyMiddleware, createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import promiseMiddleware from '../app/utils/promiseMiddleware';
+import combinedReducers from '../app/reducers';
+
+import fetchComponentData from '../app/utils/fetchNeeds';
+import instance from '../app/utils/interceptor';
+
+const finalCreateStore = applyMiddleware(promiseMiddleware)( createStore );
 
 var app = express();
 
@@ -39,23 +61,50 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler))
 }
 
-// Include server routes as a middleware
-if (process.env.NODE_ENV === 'development') {
-  app.use('*', function (req, res, next) {
-    var filename = path.join(compiler.outputPath,'index.html');
-    compiler.outputFileSystem.readFile(filename, function(err, result){
-      if (err) {
-        return next(err);
-      }
-      res.set('content-type','text/html');
-      res.send(result);
-      res.end();
-    });
-  });
-}
+app.use('*', function (req, res, next) {
+  console.log('we here1?');
+  const store = finalCreateStore(combinedReducers);
+  ReactCookie.plugToRequest(req, res);
 
-app.use(function(req, res, next) {
-  require('./routes/index')(req, res, next);
+  match( {routes: routes(store), location: req.url}, ( error, redirectLocation, renderProps ) => {
+
+    if ( error )
+      return res.status(500).send( error.message );
+
+    if ( redirectLocation )
+      return res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
+
+    if ( renderProps == null ) {
+      // return next('err msg: route not found'); // yield control to next middleware to handle the request
+      return res.status(404).send( 'Not found' );
+    }
+
+    // this is where universal rendering happens,
+    // fetchComponentData() will trigger actions listed in static "needs" props in each container component
+    // and wait for all of them to complete before continuing rendering the page,
+    // hence ensuring all data needed was fetched before proceeding
+    //
+    // renderProps: contains all necessary data, e.g: routes, router, history, components...
+    fetchComponentData( store.dispatch, renderProps.components, renderProps.params)
+
+    .then( () => {
+      const initView = renderToString((
+        <Provider store={store}>
+          <Router {...renderProps} />
+        </Provider>
+      ))
+      let state = JSON.stringify( store.getState() );
+      return res.render('index', {
+        initView: initView,
+        initialState: state
+      });
+    })
+
+    .then( page => res.status(200).send(page) )
+
+    .catch( err => res.end(err.message) );
+  });
+  // require('./routes/index')(req, res, next);
 });
 
 // catch 404 and forward to error handler
