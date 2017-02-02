@@ -1,3 +1,5 @@
+import SERVER_URL from '../constants';
+
 module.exports = {
   LOGIN: `${SERVER_URL}/accounts/login/`,
   REGISTER: `${SERVER_URL}/accounts/register/`,
