@@ -4,19 +4,22 @@ import bindActionCreators from 'redux/lib/bindActionCreators';
 import connect from 'react-redux/lib/components/connect';
 
 import * as UserActions from 'actions/accounts/user.actions';
+import { getProfile, getFullName } from 'selectors/accounts/user.selector';
 import Sidenav from 'components/layout/Sidenav';
 import { DASHBOARD } from '../seo';
+
 
 const Dashboard = props => (
   <div>
     <Helmet title={DASHBOARD.title} meta={DASHBOARD.meta} />
     <h3>Welcome to Dashboard.</h3>
-    <Sidenav user={props.user} />
+    <Sidenav profile={props.getProfile} fullName={props.getFullName} />
   </div>
 );
 
 const mapStateToProps = state => ({
-  user: state.accounts.user,
+  getProfile: getProfile(state),
+  getFullName: getFullName(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -24,7 +27,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Dashboard.propTypes = {
-  user: React.PropTypes.instanceOf(Object),
+  getProfile: React.PropTypes.instanceOf(Object),
+  getFullName: React.PropTypes.string,
 };
 
 export default connect(

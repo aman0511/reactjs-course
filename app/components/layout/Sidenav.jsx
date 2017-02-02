@@ -2,9 +2,10 @@ import React from 'react';
 import Link from 'react-router/lib/Link';
 
 const Sidenav = (props) => {
-  const { user: { profile: { states } } } = props;
+  const { profile: { states } } = props;
   return (
     <section>
+      {props.fullName}
       {states.map((item, index) => (
         item.position === 'nav' && (
           <div key={index}>
@@ -20,7 +21,8 @@ const Sidenav = (props) => {
 };
 
 Sidenav.propTypes = {
-  user: React.PropTypes.instanceOf(Object),
+  profile: React.PropTypes.instanceOf(Object),
+  fullName: React.PropTypes.string,
 };
 
 export default Sidenav;
