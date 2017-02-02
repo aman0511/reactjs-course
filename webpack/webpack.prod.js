@@ -3,7 +3,7 @@
 require('babel-polyfill');
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CompressionPlugin = require('compression-webpack-plugin');
 
 var PRODUCTION = process.env.NODE_ENV === 'production';
