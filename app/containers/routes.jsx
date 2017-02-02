@@ -8,6 +8,7 @@ if (typeof require.ensure !== 'function') require.ensure = function (d, c) { c(r
 
 /* eslint-disable */
 const accountsRoutes = require('./accounts/routes').default;
+const dashboardRoutes = require('./dashboard/routes').default;
 
 export default (store) => {
   const requireAuth = (nextState, replace, cb) => {
@@ -45,21 +46,15 @@ export default (store) => {
           [], () => cb(null, require('./Home').default),
         )}
       />
-      <Route>
-        {accountsRoutes}
-      </Route>
       <Route
+        childRoutes={accountsRoutes}
+      />
+      <Route
+        path='/dashboard'
         name="dashboard"
         onEnter={requireAuth}
-      >
-        <Route
-          path="dashboard/home"
-          name="Landing"
-          getComponent={(nextState, cb) => require.ensure(
-            [], () => cb(null, require('./dashboard/Dashboard').default),
-          )}
-        />
-      </Route>
+        childRoutes={dashboardRoutes}
+      />
       <Route
         path="*"
         getComponent={(nextState, cb) => require.ensure(

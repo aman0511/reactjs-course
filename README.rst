@@ -46,9 +46,24 @@ Conventions :-
 * Reducers:
 	- Naming - <module>/<entity>.reducers.js
 	- each module will wrap its index.js too
+	- Ensure that reducers always contains pure data. It don't have 
 
 * Utils
 	- Contains the utilities like Interceptor, configureStore, middlewares etc.
 
 * Constants
 	- It will wrap all constants from various modules.
+
+* Selectors
+	- Naming - <module>/<entity>.selector.js
+	- Derived data from core state data.
+	- Every kind of data derivation will result into selectors.
+	- Don't ever access state.data instead use selector.getData.
+	- These data derivations should be highly reusable.
+	- directly access selectors in render from props and use it or they can be used in services.
+
+* Services
+	- Naming - <module>/<entity>.service.js
+	- Services are simple JS functions which encapsulates Business logic and internally uses selectors.
+	- e.g. user.service,js - getUserFromAPI
+	Now getUserFromAPI encapsulates always must have business functionality e.g. call API and on success set to state via action or in error take certain other action.

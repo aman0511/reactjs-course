@@ -1,6 +1,6 @@
 'use strict';
 
-require('babel-register')
+require('babel-register');
 
 var express = require('express');
 var path = require('path');
@@ -61,8 +61,8 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler))
 }
 
+// app.use( ( req, res, next ) => {
 app.use('*', function (req, res, next) {
-  console.log('we here1?');
   const store = finalCreateStore(combinedReducers);
   ReactCookie.plugToRequest(req, res);
 
