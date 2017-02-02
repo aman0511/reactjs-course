@@ -1,0 +1,5 @@
+# /node_modules/* ignored by default
+
+# Ignore build files
+build/*
+app/actions/**/urls.js
