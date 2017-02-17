@@ -5,7 +5,7 @@ const Sidenav = (props) => {
   const { profile: { states } } = props;
   return (
     <section>
-      {props.fullName}
+      {props.profileFullName}
       {states.map((item, index) => (
         item.position === 'nav' && (
           <div key={index}>
@@ -22,7 +22,7 @@ const Sidenav = (props) => {
 
 Sidenav.propTypes = {
   profile: React.PropTypes.instanceOf(Object),
-  fullName: React.PropTypes.string,
+  profileFullName: React.PropTypes.string,
 };
 
 export default Sidenav;
