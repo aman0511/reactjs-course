@@ -7,6 +7,7 @@ import { getProfile, getFullName } from 'selectors/accounts/user.selector';
 
 import Sidenav from 'components/layout/Sidenav';
 import Header from 'components/layout/Header';
+import routesMapping from '../routesMapping';
 
 class SideNavLayout extends React.Component {
 
@@ -33,6 +34,7 @@ class SideNavLayout extends React.Component {
             <Sidenav
               profile={profile}
               profileFullName={profileFullName}
+              routesMapping={routesMapping}
             />
           </div>
           <div className="small-8 columns">

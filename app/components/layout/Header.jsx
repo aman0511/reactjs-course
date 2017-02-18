@@ -2,7 +2,6 @@ import React from 'react';
 
 const Header = (props) => {
   const { profile, profileFullName } = props;
-  console.log(profile, profileFullName);
   return (
     <div className="top-bar">
       <div className="top-bar-title">T2B Skeleton</div>
