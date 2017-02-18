@@ -8,7 +8,7 @@ if (typeof require.ensure !== 'function') require.ensure = function (d, c) { c(r
 
 /* eslint-disable */
 const accountsRoutes = require('./accounts/routes').default;
-const dashboardRoutes = require('./dashboard/routes').default;
+const addressRoutes = require('./address/routes').default;
 
 export default (store) => {
   const requireAuth = (nextState, replace, cb) => {
@@ -18,13 +18,13 @@ export default (store) => {
         .then(
           () => {
             const user = store.getState().accounts.user.profile;
-            if (!user) replace('/');
-            const isAllowed = user.states.filter(item => item.url === nextState.location.pathname);
-            if (!isAllowed.length) replace(user.states[0].url);
+            if (!user) replace({ pathname: '/login', query: { next: nextState.location.pathname } });
+            const isAllowed = user.access_control.indexOf(nextState.routes[nextState.routes.length-1].name);
+            if (isAllowed < 0) replace({ pathname: '/dashboard'});
             cb();
           },
           () => {
-            replace('/');
+            replace({ pathname: '/login', query: { next: nextState.location.pathname } });
             cb();
           },
         );
@@ -50,11 +50,26 @@ export default (store) => {
         childRoutes={accountsRoutes}
       />
       <Route
-        path='/dashboard'
-        name="dashboard"
-        onEnter={requireAuth}
-        childRoutes={dashboardRoutes}
-      />
+        name='sidenav_layout'
+        getComponent={(nextState, cb) => require.ensure(
+          [], () => cb(null, require('./layout/SideNavLayout').default),
+        )}
+      >
+        <Route
+          path='/dashboard'
+          name='dashboard'
+          onEnter={requireAuth}
+          getComponent={(nextState, cb) => require.ensure(
+            [], () => cb(null, require('./dashboard/Dashboard').default),
+          )}
+        />
+        <Route
+          path='/address'
+          name='address'
+          onEnter={requireAuth}
+          childRoutes={addressRoutes}
+        />
+      </Route>
       <Route
         path="*"
         getComponent={(nextState, cb) => require.ensure(

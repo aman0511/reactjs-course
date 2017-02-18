@@ -1,14 +1,13 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import bindActionCreators from 'redux/lib/bindActionCreators';
 import connect from 'react-redux/lib/components/connect';
 
 import * as UserActions from 'actions/accounts/user.actions';
-import { getProfile } from 'selectors/accounts/user.selector';
-import { DASHBOARD } from '../seo';
+import { getProfile, getFullName } from 'selectors/accounts/user.selector';
 
+import Header from 'components/layout/Header';
 
-class Dashboard extends React.Component {
+class SideNavLayout extends React.Component {
 
   constructor(props) {
     super(props);
@@ -21,31 +20,29 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const { profile } = this.props;
-    if (profile.is_backoffice_profile) {
-      return (
-        <div>
-          <Helmet title={DASHBOARD.title} meta={DASHBOARD.meta} />
-          <h3>Welcome to Dashboard.</h3>
-        </div>
-      );
-    }
+    const { profile, profileFullName } = this.props;
     return (
       <div>
-        <Helmet title={DASHBOARD.title} meta={DASHBOARD.meta} />
-        <h3>Welcome to Consumer.</h3>
+        <Header
+          profile={profile}
+          profileFullName={profileFullName}
+        />
+        {this.props.children}
       </div>
     );
   }
 
 }
 
-Dashboard.propTypes = {
+SideNavLayout.propTypes = {
   profile: React.PropTypes.instanceOf(Object),
+  profileFullName: React.PropTypes.string,
+  children: React.PropTypes.instanceOf(Object),
 };
 
 const mapStateToProps = state => ({
   profile: getProfile(state),
+  profileFullName: getFullName(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -55,4 +52,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Dashboard);
+)(SideNavLayout);

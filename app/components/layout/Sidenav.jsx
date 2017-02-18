@@ -2,10 +2,10 @@ import React from 'react';
 import Link from 'react-router/lib/Link';
 
 const Sidenav = (props) => {
-  const { profile: { states } } = props;
+  const { profile: { states }, profileFullName } = props;
   return (
     <section>
-      {props.profileFullName}
+      {profileFullName}
       {states.map((item, index) => (
         item.position === 'nav' && (
           <div key={index}>

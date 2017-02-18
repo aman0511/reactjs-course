@@ -33,9 +33,8 @@ function REGISTER_FAILURE(state) {
 function GET_USER_PROFILE_SUCCESS(state, action) {
   const data = action.result;
   data.states = [
-    { url: '/dashboard/home', label: 'Home', position: 'nav' },
-    { url: '/dashboard/profile', label: 'Profile', position: 'nav' },
-    { url: '/dashboard/settings', label: 'Settings', position: 'header' },
+    { url: '/dashboard', label: 'Home', position: 'nav' },
+    { url: '/address/country', label: 'Countries', position: 'nav' },
   ];
   return Object.assign({}, state, {
     profile: data,
