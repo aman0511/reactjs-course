@@ -8,7 +8,7 @@
     "import/parser": "babel-eslint",
     "import/resolver": {
       "webpack": {
-        "config": "webpack/webpack.config.js"
+        "config": "webpack/webpack.client.babel.js"
       }
     }
   },
