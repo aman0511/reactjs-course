@@ -15,7 +15,6 @@ import MatchWhenAuthorized from './MatchWhenAuthorized';
 class LayoutWithSideNav extends React.Component {
 
   componentWillMount() {
-    console.log('Welcome to main Route');
     this.logout = this.logout.bind(this);
     this.goTo = this.goTo.bind(this);
   }
@@ -44,13 +43,19 @@ class LayoutWithSideNav extends React.Component {
         profileFullName={profileFullName}
         logout={this.logout}
       />
-      <SideNav
-        profile={profile}
-        profileFullName={profileFullName}
-      />
-      <Switch>
-        <MatchWhenAuthorized path="/dashboard" component={Dashboard} />
-      </Switch>
+      <div className="row">
+        <div className="small-3 columns">
+          <SideNav
+            profile={profile}
+            profileFullName={profileFullName}
+          />
+        </div>
+        <div className="small-9 columns">
+          <Switch>
+            <MatchWhenAuthorized path="/dashboard" component={Dashboard} />
+          </Switch>
+        </div>
+      </div>
     </section>);
   }
 }

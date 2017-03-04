@@ -41,8 +41,9 @@ const LoginForm = (props) => {
         <div className="text-center">
           <button
             type="submit"
-            data-balloon="Whats up!"
+            data-balloon="Click to Login"
             data-balloon-pos="up"
+            className="hollow button"
             disabled={submitting}
           >
             {submitting ? 'Signing In' : 'Sign In'}

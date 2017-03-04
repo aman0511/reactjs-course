@@ -13,7 +13,7 @@ import DevTools from './DevTools';
 class App extends React.Component {
 
   componentWillMount() {
-    console.log('Welcome to main Route');
+    console.log('Welcome to main Routes');
   }
 
   render() {

@@ -49,7 +49,7 @@ const RegisterForm = (props) => {
           <Field name="password" component="input" type="password" />
         </div>
         <div className="text-center">
-          <button type="submit" disabled={submitting}>
+          <button type="submit" disabled={submitting} className="hollow button">
             {submitting ? 'Signing In' : 'Sign In'}
           </button>
         </div>

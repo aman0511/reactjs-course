@@ -32,7 +32,6 @@ class MatchWhenUnAuthorized extends React.Component {
     if (isLoading) {
       return <FullScreenLoader active />;
     }
-    console.log(profile);
     return (
       <Route
         {...rest}

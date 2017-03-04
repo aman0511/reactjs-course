@@ -18,13 +18,15 @@ class ForgotPassword extends React.Component {
 
   render() {
     return (
-      <section>
-        <h3>Forgot Password</h3>
-        <ForgotPasswordForm forgotPassword={this.forgotPassword} />
-        <div>
-          Go Back to <Link to="/accounts/login">login</Link>?
+      <div className="row">
+        <div className="small-8 large-offset-2 columns">
+          <h3>Forgot Password</h3>
+          <ForgotPasswordForm forgotPassword={this.forgotPassword} />
+          <div>
+            Go Back to <Link to="/accounts/login">login</Link>?
+          </div>
         </div>
-      </section>
+      </div>
     );
   }
 }

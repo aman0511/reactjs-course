@@ -17,7 +17,6 @@ import MatchWhenUnAuthorized from './MatchWhenUnAuthorized';
 class LayoutWithHeader extends React.Component {
 
   componentWillMount() {
-    console.log('Welcome to main Route');
     this.logout = this.logout.bind(this);
   }
 

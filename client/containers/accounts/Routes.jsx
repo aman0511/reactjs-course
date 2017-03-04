@@ -14,8 +14,7 @@ class Accounts extends React.Component {
   render() {
     const match = this.props.match;
     return (
-      <div>
-        Hello from Accounts
+      <section>
         <Switch>
           <Route
             exact
@@ -35,7 +34,7 @@ class Accounts extends React.Component {
             component={ForgotPassword}
           />
         </Switch>
-      </div>
+      </section>
     );
   }
 }

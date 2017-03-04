@@ -23,10 +23,12 @@ class Register extends React.Component {
 
   render() {
     return (
-      <section>
-        <h2>Welcome to Register.</h2>
-        <RegisterForm register={this.register} />
-      </section>
+      <div className="row">
+        <div className="small-8 large-offset-2 columns">
+          <h2>Welcome to Register.</h2>
+          <RegisterForm register={this.register} />
+        </div>
+      </div>
     );
   }
 }

@@ -33,22 +33,21 @@ class Login extends React.Component {
   render() {
     const { from } = this.props.location.state || '/';
     const { redirectToReferrer } = this.state;
-    console.log('from');
-    console.log(from);
-    console.log(redirectToReferrer);
 
     return (
-      <section>
-        {redirectToReferrer && (
-          <Redirect to={from || '/dashboard'} />
-        )}
-        {from && (
-          <p>You must log in to view the page at {from.pathname}</p>
-        )}
-        <h2>Welcome to Login.</h2>
-        <LoginForm login={this.login} />
-        <Link to="/accounts/forgot-password">Forgot Password?</Link>
-      </section>
+      <div className="row">
+        <div className="small-8 large-offset-2 columns">
+          {redirectToReferrer && (
+            <Redirect to={from || '/dashboard'} />
+          )}
+          {from && (
+            <p>You must log in to view the page at {from.pathname}</p>
+          )}
+          <h2>Welcome to Login.</h2>
+          <LoginForm login={this.login} />
+          <Link to="/accounts/forgot-password">Forgot Password?</Link>
+        </div>
+      </div>
     );
   }
 
