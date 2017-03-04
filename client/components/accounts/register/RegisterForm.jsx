@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-// import Field from 'redux-form/lib/Field';
-// import reduxForm from 'redux-form/lib/reduxForm';
-// import SubmissionError from 'redux-form/lib/SubmissionError';
+
+import { ButtonLoader } from 'components/core/Loaders';
 
 const validate = (values) => {
   const errors = {};
@@ -50,7 +49,10 @@ const RegisterForm = (props) => {
         </div>
         <div className="text-center">
           <button type="submit" disabled={submitting} className="hollow button">
-            {submitting ? 'Signing In' : 'Sign In'}
+            {submitting ?
+              <span><ButtonLoader active /> Registering</span> :
+              'Submit'
+            }
           </button>
         </div>
       </form>

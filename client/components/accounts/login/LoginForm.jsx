@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 
+import { ButtonLoader } from 'components/core/Loaders';
+
 const validate = (values) => {
   const errors = {};
   if (!values.email) {
@@ -46,7 +48,10 @@ const LoginForm = (props) => {
             className="hollow button"
             disabled={submitting}
           >
-            {submitting ? 'Signing In' : 'Sign In'}
+            {submitting ?
+              <span><ButtonLoader active /> Signing In</span> :
+              'Sign In'
+            }
           </button>
         </div>
       </form>

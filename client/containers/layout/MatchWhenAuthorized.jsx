@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import bindActionCreators from 'redux/lib/bindActionCreators';
 import connect from 'react-redux/lib/connect/connect';
 
-import FullScreenLoader from 'components/core/Loaders';
+import { FullScreenLoader } from 'components/core/Loaders';
 import * as UserActions from 'actions/accounts/user.actions';
 import { getProfile } from 'selectors/accounts/user.selector';
 

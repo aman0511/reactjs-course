@@ -21,4 +21,23 @@ FullScreenLoader.propTypes = {
   active: React.PropTypes.bool.isRequired,
 };
 
-export default FullScreenLoader;
+const ButtonLoader = (props) => {
+  const { active } = props;
+  if (!active) {
+    return null;
+  }
+  return (
+    <div className="loader-inner ball-clip-rotate">
+      <div />
+    </div>
+  );
+};
+
+ButtonLoader.propTypes = {
+  active: React.PropTypes.bool.isRequired,
+};
+
+export {
+  FullScreenLoader,
+  ButtonLoader,
+};

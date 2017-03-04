@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 
+import { ButtonLoader } from 'components/core/Loaders';
 import style from './style.css';
 
 const validate = (values) => {
@@ -33,7 +34,10 @@ const ForgotPasswordForm = (props) => {
         </div>
         <div className="text-center">
           <button type="submit" disabled={submitting} className="hollow button">
-            {submitting ? 'Sending' : 'Send'}
+            {submitting ?
+              <span><ButtonLoader active /> Sending </span> :
+              'Send'
+            }
           </button>
         </div>
       </form>
