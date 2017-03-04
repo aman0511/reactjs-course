@@ -31,13 +31,8 @@ function REGISTER_FAILURE(state) {
 }
 
 function GET_USER_PROFILE_SUCCESS(state, action) {
-  const data = action.result;
-  data.states = [
-    { url: '/dashboard', label: 'Home', position: 'nav' },
-    { url: '/address/country', label: 'Countries', position: 'nav' },
-  ];
   return Object.assign({}, state, {
-    profile: data,
+    profile: action.result,
   });
 }
 
@@ -53,6 +48,16 @@ function FORGOT_PASSWORD_FAILURE(state) {
   return state;
 }
 
+function LOGOUT_SUCCESS(state) {
+  cookie.remove('authToken', { path: '/' });
+  return state;
+}
+
+function LOGOUT_FAILURE(state) {
+  cookie.remove('authToken', { path: '/' });
+  return state;
+}
+
 const handlers = {
   [types.LOGIN_SUCCESS]: LOGIN_SUCCESS,
   [types.LOGIN_FAILURE]: LOGIN_FAILURE,
@@ -62,6 +67,8 @@ const handlers = {
   [types.GET_USER_PROFILE_FAILURE]: GET_USER_PROFILE_FAILURE,
   [types.FORGOT_PASSWORD_SUCCESS]: FORGOT_PASSWORD_SUCCESS,
   [types.FORGOT_PASSWORD_FAILURE]: FORGOT_PASSWORD_FAILURE,
+  [types.LOGOUT_SUCCESS]: LOGOUT_SUCCESS,
+  [types.LOGOUT_FAILURE]: LOGOUT_FAILURE,
 };
 
 export default createReducer(defaultState, handlers);

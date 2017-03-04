@@ -16,6 +16,20 @@ export function register(data) {
   };
 }
 
+export function logout() {
+  return {
+    type: types.LOGOUT,
+    promise: axios.post(URLS.LOGOUT),
+  };
+}
+
+export function resetState() {
+  return {
+    type: types.RESET_STATE,
+    payload: null,
+  };
+}
+
 export function getUserProfile() {
   return {
     type: types.GET_USER_PROFILE,

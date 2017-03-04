@@ -3,7 +3,7 @@ import Link from 'react-router-dom/Link';
 
 
 const Header = (props) => {
-  const { profile, profileFullName } = props;
+  const { profile, profileFullName, logout } = props;
   return (
     <div className="top-bar">
       <div className="top-bar-title">
@@ -14,6 +14,9 @@ const Header = (props) => {
           {profile ?
             <ul className="menu">
               <li><Link to="/accounts/login">{profileFullName}</Link></li>
+              <li>
+                <button type="button" className="button" onClick={logout}>logout</button>
+              </li>
             </ul> :
             <ul className="menu">
               <li><Link to="/accounts/login">Login</Link></li>
@@ -31,6 +34,7 @@ const Header = (props) => {
 Header.propTypes = {
   profile: React.PropTypes.instanceOf(Object).isRequired,
   profileFullName: React.PropTypes.string.isRequired,
+  logout: React.PropTypes.func.isRequired,
 };
 
 export default Header;

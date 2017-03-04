@@ -21,6 +21,8 @@ class MatchWhenAuthorized extends React.Component {
       this.props.UserActions.getUserProfile().then(
         () => this.setState({ isLoading: false })).catch(
         () => this.setState({ isLoading: false }));
+    } else {
+      this.setState({ isLoading: false });
     }
   }
 
