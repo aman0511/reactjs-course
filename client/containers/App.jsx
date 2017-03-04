@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import styles from 'styles/foundation/styles.scss';
+import ExecutionEnvironment from 'exenv';
+import foundationStyles from 'styles/foundation/styles.scss';
 import LayoutWithSideNav from 'containers/layout/LayoutWithSideNav';
 import LayoutWithHeader from 'containers/layout/LayoutWithHeader';
 
@@ -15,7 +16,15 @@ class App extends React.Component {
   }
 
   render() {
-    styles.use();
+    foundationStyles.use();
+    /* eslint-disable */
+    if (ExecutionEnvironment.canUseDOM) {
+      const loadersStyle = require('styles/loaders/styles.scss');
+      const balloonStyle = require('balloon-css/src/balloon.scss');
+      loadersStyle.use();
+      balloonStyle.use();
+    }
+    /* eslint-enable */
     return (
       <div>
         <DevTools />

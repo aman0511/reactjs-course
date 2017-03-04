@@ -1,0 +1,15 @@
+$primary-color: #E28413;
+@import 'node_modules/loaders.css/src/animations/ball-clip-rotate.scss';
+@import 'node_modules/loaders.css/src/animations/ball-scale-multiple.scss';
+@import 'node_modules/loaders.css/src/animations/ball-scale-ripple-multiple.scss';
+
+.fullPageLoader {
+  position: fixed;
+  height: 5em;
+  width: 5em;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
