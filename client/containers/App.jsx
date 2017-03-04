@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import ExecutionEnvironment from 'exenv';
 import foundationStyles from 'styles/foundation/styles.scss';
+import commonStyles from 'styles/common.css';
 import LayoutWithSideNav from 'containers/layout/LayoutWithSideNav';
 import LayoutWithHeader from 'containers/layout/LayoutWithHeader';
 
@@ -17,6 +18,7 @@ class App extends React.Component {
 
   render() {
     foundationStyles.use();
+    commonStyles.use();
     /* eslint-disable */
     if (ExecutionEnvironment.canUseDOM) {
       const loadersStyle = require('styles/loaders/styles.scss');
